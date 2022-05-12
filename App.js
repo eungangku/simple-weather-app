@@ -23,7 +23,11 @@ export default function App() {
         coords: { latitude, longitude },
       } = await Location.getCurrentPositionAsync({ accuracy: 5 });
       const location = await Location.reverseGeocodeAsync({ latitude, longitude }, { useGoogleMaps: false });
-      setCity(location[0].city);
+      if (location[0].city === null) {
+        setCity(location[0].region);
+      } else {
+        setCity(location[0].city);
+      }
 
       const res = await fetch(`https://api.openweathermap.org/data/2.5/onecall?lat=${latitude}&lon=${longitude}&appid=${API_KEY}&units=metric`);
       const json = await res.json();
