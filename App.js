@@ -37,7 +37,7 @@ export default function App() {
 
   const convertTime = (epoch) => {
     const date = new Date(epoch * 1000);
-    const month = date.getMonth();
+    const month = date.getMonth() + 1;
     const day = date.getDate();
     return `${month}/${day}`;
   };
@@ -106,12 +106,15 @@ const styles = StyleSheet.create({
     backgroundColor: "#ececec",
   },
   date: {
+    color: "gray",
     fontSize: 20,
+    fontWeight: "bold",
   },
   temp: {
     marginTop: 20,
     color: "#005a80",
     fontSize: 180,
+    fontWeight: "bold",
   },
   desc: {
     color: "gray",
