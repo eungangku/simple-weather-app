@@ -2,11 +2,22 @@ import { useState, useEffect } from "react";
 import { StatusBar } from "expo-status-bar";
 import { StyleSheet, Text, View, ScrollView, Dimensions } from "react-native";
 import * as Location from "expo-location";
+import Ionicons from "@expo/vector-icons/Ionicons";
 
 // openweathermap.org API
 const API_KEY = "f50c83864869dd9da9d82ee5ddf3ca68";
 
 const { width: DeviceWidth } = Dimensions.get("window");
+
+const icons = {
+  Clouds: "cloudy",
+  Clear: "sunny",
+  Atmosphere: "wind",
+  Snow: "snowflake",
+  Rain: "cloud-showers-heavy",
+  Drizzle: "rainy",
+  Thunderstorm: "thunderstorm",
+};
 
 export default function App() {
   const [primarycolor, setPrimarycolor] = useState("#005a80");
@@ -55,7 +66,6 @@ export default function App() {
         <ScrollView horizontal pagingEnabled showsHorizontalScrollIndicator={false} contentContainerStyle={styles.weather}>
           {days.length === 0 ? (
             <View style={styles.loading}>
-              {/* <Text style={styles.temp}>00</Text> */}
               <Text style={styles.desc}>loading...</Text>
             </View>
           ) : (
@@ -66,7 +76,10 @@ export default function App() {
                     <Text style={styles.date}>{convertTime(day.dt)}</Text>
                   </View>
                   <Text style={styles.temp}>{Math.round(day.temp.day)}</Text>
-                  <Text style={styles.desc}>{day.weather[0].main}</Text>
+                  <View style={styles.descContainer}>
+                    <Ionicons style={{ marginTop: 5 }} name={icons[day.weather[0].main]} size={45} color="gray" />
+                    <Text style={styles.desc}>{day.weather[0].main}</Text>
+                  </View>
                 </View>
               );
             })
@@ -125,9 +138,14 @@ const styles = StyleSheet.create({
     fontSize: 180,
     fontWeight: "bold",
   },
+  descContainer: {
+    flexDirection: "row",
+    alignItems: "center",
+    marginTop: -20,
+  },
   desc: {
     color: "gray",
-    margin: -20,
-    fontSize: 50,
+    marginLeft: 5,
+    fontSize: 40,
   },
 });
