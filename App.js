@@ -86,7 +86,7 @@ export default function App() {
           )}
         </ScrollView>
       </View>
-      <StatusBar style="auto" />
+      <StatusBar style="light" />
     </View>
   );
 }
