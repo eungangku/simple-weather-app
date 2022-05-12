@@ -54,8 +54,8 @@ export default function App() {
       <View style={styles.contentContainer}>
         <ScrollView horizontal pagingEnabled showsHorizontalScrollIndicator={false} contentContainerStyle={styles.weather}>
           {days.length === 0 ? (
-            <View style={styles.day}>
-              <Text style={styles.temp}>00</Text>
+            <View style={styles.loading}>
+              {/* <Text style={styles.temp}>00</Text> */}
               <Text style={styles.desc}>loading...</Text>
             </View>
           ) : (
@@ -98,6 +98,11 @@ const styles = StyleSheet.create({
     borderTopRightRadius: 15,
     backgroundColor: "#fff",
     flex: 3,
+  },
+  loading: {
+    width: DeviceWidth,
+    marginTop: 150,
+    alignItems: "center",
   },
   day: {
     width: DeviceWidth,
